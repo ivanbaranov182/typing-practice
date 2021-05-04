@@ -1,11 +1,13 @@
 import React from 'react';
 
 export const formElementChange = <T>(
-  { target: { name, type, value, checked } }: React.ChangeEvent<HTMLInputElement>,
+  {
+    target: { name, type, value, checked }
+  }: React.ChangeEvent<HTMLInputElement>,
   setFormData: React.Dispatch<React.SetStateAction<T>>,
-  data: T,
+  data: T
 ) =>
   setFormData({
     ...data,
-    [name]: type === 'checkbox' ? checked : value,
+    [name]: type === 'checkbox' ? checked : value
   });

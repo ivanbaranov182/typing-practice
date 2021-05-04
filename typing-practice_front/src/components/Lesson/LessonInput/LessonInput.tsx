@@ -4,17 +4,31 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   textArea: {
-    marginBottom: '10px',
-  }, 
+    marginBottom: '10px'
+  }
 }));
 
 interface ILessonInput {
-  lessonText: string;
-  onKeyPress: React.Dispatch<React.SetStateAction<React.KeyboardEvent>>;
-} 
+  onKeyPress: React.KeyboardEventHandler<HTMLDivElement>;
+  [key: string]: any;
+}
 
-export const LessonInput: React.FC<ILessonInput> = ({ onKeyPress }) => {
+export const LessonInput: React.FC<ILessonInput> = ({
+  onKeyPress,
+  ...rest
+}) => {
   const classes = useStyles();
 
-  return <TextField multiline rows={7} variant="outlined" autoFocus fullWidth className={classes.textArea} onKeyPress={onKeyPress} />;
+  return (
+    <TextField
+      multiline
+      rows={7}
+      variant="outlined"
+      autoFocus
+      fullWidth
+      className={classes.textArea}
+      onKeyPress={onKeyPress}
+      {...rest}
+    />
+  );
 };

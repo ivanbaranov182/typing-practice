@@ -15,15 +15,15 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 export interface IFormData {
@@ -38,7 +38,7 @@ export const SignIn = () => {
   const [data, setData] = useState<IFormData>({
     email: '',
     password: '',
-    remember: false,
+    remember: false
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +47,6 @@ export const SignIn = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log('data', data);
   };
 
   return (
@@ -86,10 +85,24 @@ export const SignIn = () => {
           value={data.password}
         />
         <FormControlLabel
-          control={<Checkbox value="remember" name="remember" color="primary" onChange={handleChange} checked={data.remember} />}
+          control={
+            <Checkbox
+              value="remember"
+              name="remember"
+              color="primary"
+              onChange={handleChange}
+              checked={data.remember}
+            />
+          }
           label="Remember me"
         />
-        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
           Sign In
         </Button>
         <Grid container>

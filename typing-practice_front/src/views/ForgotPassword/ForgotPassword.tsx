@@ -13,15 +13,15 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 interface IFormData {
@@ -32,7 +32,7 @@ export const ForgotPassword = () => {
   const classes = useStyles();
 
   const [data, setData] = useState<IFormData>({
-    email: '',
+    email: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +41,6 @@ export const ForgotPassword = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log('data', data);
   };
 
   return (
@@ -66,7 +65,13 @@ export const ForgotPassword = () => {
           onChange={handleChange}
           value={data.email}
         />
-        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
           Send
         </Button>
         <Grid container>

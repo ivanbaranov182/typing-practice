@@ -3,10 +3,7 @@
     "outDir": "./dist",
     "module": "esnext",
     "target": "es5",
-    "lib": [
-      "es6",
-      "dom"
-    ],
+    "lib": ["es6", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react-jsx",
@@ -16,10 +13,7 @@
     "strictNullChecks": true,
     "baseUrl": "./",
     "rootDir": "./",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "importsNotUsedAsValues": "preserve",
@@ -29,13 +23,9 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": []
   },
-  "exclude": [
-    "node_modules",
-    "webpack"
-  ],
-  "include": [
-    "src"
-  ]
+  "exclude": ["node_modules", "webpack"],
+  "include": ["src"]
 }

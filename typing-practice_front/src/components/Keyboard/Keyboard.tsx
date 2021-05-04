@@ -12,283 +12,281 @@ const keyBoardData: IKeyboardData[] = [
   {
     key: '`',
     value: '`',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '1',
     value: '1',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '2',
     value: '2',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '3',
     value: '3',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '4',
     value: '4',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '5',
     value: '5',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '6',
     value: '6',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '7',
     value: '7',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '8',
     value: '8',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '9',
     value: '9',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '0',
     value: '0',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '-',
     value: '-',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '=',
     value: '=',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: 'delete',
     value: 'delete',
-    className: 'delete lastitem',
+    className: 'delete lastitem'
   },
   {
     key: 'tab',
     value: 'tab',
-    className: 'tab',
+    className: 'tab'
   },
   {
     key: 'q',
     value: 'q',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'w',
     value: 'w',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'e',
     value: 'e',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'r',
     value: 'r',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 't',
     value: 't',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'y',
     value: 'y',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'u',
     value: 'u',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'i',
     value: 'i',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'o',
     value: 'o',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'p',
     value: 'p',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: '[',
     value: '[',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: ']',
     value: ']',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '\\',
     value: '\\',
-    className: 'symbol lastitem',
+    className: 'symbol lastitem'
   },
   {
     key: 'capslock',
     value: 'caps lock',
-    className: 'capslock',
+    className: 'capslock'
   },
   {
     key: 'a',
     value: 'a',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 's',
     value: 's',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'd',
     value: 'd',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'f',
     value: 'f',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'g',
     value: 'g',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'h',
     value: 'h',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'j',
     value: 'j',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'k',
     value: 'k',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'l',
     value: 'l',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: ';',
     value: ';',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: "'",
     value: "'",
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: 'return',
     value: 'return',
-    className: 'return lastitem',
+    className: 'return lastitem'
   },
   {
     key: 'shift',
     value: 'shift',
-    className: 'left-shift',
+    className: 'left-shift'
   },
   {
     key: 'z',
     value: 'z',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'x',
     value: 'x',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'c',
     value: 'c',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'v',
     value: 'v',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'b',
     value: 'b',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'n',
     value: 'n',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: 'm',
     value: 'm',
-    className: 'letter',
+    className: 'letter'
   },
   {
     key: ',',
     value: ',',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '.',
     value: '.',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: '/',
     value: '/',
-    className: 'symbol',
+    className: 'symbol'
   },
   {
     key: 'shift',
     value: 'shift',
-    className: 'right-shift lastitem',
+    className: 'right-shift lastitem'
   },
   {
     key: '',
     value: '',
-    className: 'space lastitem',
-  },
+    className: 'space lastitem'
+  }
 ];
 
-export const Keyboard: React.FC = () => {
-  return (
-    <ul id="keyboard">
-      {keyBoardData.map((key, index) => (
-        <li className={key.className} key={index}>
-          {key.value}
-        </li>
-      ))}
-    </ul>
-  );
-};
+export const Keyboard: React.FC = () => (
+  <ul id="keyboard">
+    {keyBoardData.map((key, index) => (
+      <li className={key.className} key={index}>
+        {key.value}
+      </li>
+    ))}
+  </ul>
+);

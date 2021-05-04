@@ -1,3 +1,4 @@
+import React from 'react';
 import { RouteProps } from 'react-router-dom';
 import { MainLayout } from '../layouts/MainLayout';
 import { ContentOnlyLayout } from '../layouts/ContentOnlyLayout';
@@ -8,7 +9,6 @@ import { SignUp } from '../views/SignUp';
 import { SignIn } from '../views/SignIn';
 import { ForgotPassword } from '../views/ForgotPassword';
 import { NotFound } from '../views/NotFound';
-import React from 'react';
 
 export interface IRouteProps extends RouteProps {
   title: string;
@@ -21,15 +21,15 @@ export const authRoutes: IRouteProps[] = [
     component: Home,
     exact: true,
     title: 'Home',
-    layout: MainLayout,
+    layout: MainLayout
   },
   {
     path: '/lesson/:id',
     component: Lesson,
     exact: true,
     title: 'Lesson',
-    layout: MainLayout,
-  },
+    layout: MainLayout
+  }
 ];
 
 export const unAuthRoutes: IRouteProps[] = [
@@ -38,27 +38,27 @@ export const unAuthRoutes: IRouteProps[] = [
     component: SignUp,
     exact: true,
     title: 'SignUp',
-    layout: ContentOnlyLayout,
+    layout: ContentOnlyLayout
   },
   {
     path: '/signup',
     component: SignUp,
     exact: true,
     title: 'SignUp',
-    layout: ContentOnlyLayout,
+    layout: ContentOnlyLayout
   },
   {
     path: '/signin',
     component: SignIn,
     title: 'SignIn',
-    layout: ContentOnlyLayout,
+    layout: ContentOnlyLayout
   },
   {
     path: '/forgot-password',
     component: ForgotPassword,
     title: 'ForgotPassword',
-    layout: ContentOnlyLayout,
-  },
+    layout: ContentOnlyLayout
+  }
 ];
 
 export const commonRoutes: IRouteProps[] = [
@@ -66,6 +66,6 @@ export const commonRoutes: IRouteProps[] = [
     path: '*',
     component: NotFound,
     title: 'Page not found',
-    layout: ContentOnlyLayout,
-  },
+    layout: ContentOnlyLayout
+  }
 ];

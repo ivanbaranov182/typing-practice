@@ -15,15 +15,15 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 export interface IFormData {
@@ -44,7 +44,7 @@ export const SignUp: React.FC = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    allowExtraEmails: true,
+    allowExtraEmails: true
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,6 @@ export const SignUp: React.FC = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log('data', data);
   };
 
   return (
@@ -150,12 +149,20 @@ export const SignUp: React.FC = () => {
             />
           </Grid>
         </Grid>
-        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
           Sign Up
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
-            <RouterLink to="signin">Already have an account? Sign in</RouterLink>
+            <RouterLink to="signin">
+              Already have an account? Sign in
+            </RouterLink>
           </Grid>
         </Grid>
       </form>

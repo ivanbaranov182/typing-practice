@@ -9,8 +9,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh',
-  },
+    minHeight: '100vh'
+  }
 }));
 
 export const MainLayout: React.FC = ({ children }) => {

@@ -12,7 +12,7 @@ const initialState: IUserInitialState = {
   token: '',
   firstName: '',
   lastName: '',
-  email: '',
+  email: ''
 };
 
 const user = (state = initialState, action: AnyAction) => {
@@ -28,7 +28,7 @@ const user = (state = initialState, action: AnyAction) => {
     case LOGOUT_USER: {
       return {
         ...state,
-        token: null,
+        token: null
       };
     }
     default: {
