@@ -9,14 +9,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface ILessonInput {
-  onKeyPress: React.KeyboardEventHandler<HTMLDivElement>;
+  onKeyDown: React.KeyboardEventHandler<HTMLDivElement>;
   [key: string]: any;
 }
 
-export const LessonInput: React.FC<ILessonInput> = ({
-  onKeyPress,
-  ...rest
-}) => {
+export const LessonInput: React.FC<ILessonInput> = ({ onKeyDown, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -27,7 +24,7 @@ export const LessonInput: React.FC<ILessonInput> = ({
       autoFocus
       fullWidth
       className={classes.textArea}
-      onKeyPress={onKeyPress}
+      onKeyDown={onKeyDown}
       {...rest}
     />
   );

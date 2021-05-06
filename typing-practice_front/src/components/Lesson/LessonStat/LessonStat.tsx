@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { LessonStatItem } from '../LessonStatItem/LessonStatItem';
@@ -25,37 +25,25 @@ enum StatisticItems {
 const statisticItems: Array<StatisticItems> = Object.values(StatisticItems);
 
 interface ILessonProps {
+  time: number;
   signs: number;
+  typed: number;
+  progress: number;
+  wpm: number;
+  errors: number;
+  accuracy: number;
 }
 
-export const LessonStat: React.FC<ILessonProps> = ({ signs }) => {
+export const LessonStat: React.FC<ILessonProps> = (props) => {
   const classes = useStyles();
-  const [statistic, setStatistic] = useState<Record<StatisticItems, number>>({
-    signs,
-    typed: 0,
-    progress: 0,
-    wpm: 0,
-    errors: 0,
-    accuracy: 0,
-    time: 0
-  });
 
-  const getStatItemValue = (title: StatisticItems): string =>
-    String(statistic[title]);
+  console.log('props', Object.keys(props));
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStatistic((statistic) => ({
-        ...statistic,
-        time: statistic.time + 1
-      }));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const getStatItemValue = (title: string): string => String(props[title]);
 
   return (
     <Paper className={classes.lessonStat}>
-      {statisticItems.map((statisticItem) => (
+      {Object.keys(props).map((statisticItem) => (
         <LessonStatItem
           key={statisticItem}
           value={getStatItemValue(statisticItem)}

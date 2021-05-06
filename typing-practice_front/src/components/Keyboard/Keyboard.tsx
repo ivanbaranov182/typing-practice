@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import './Keyboard.css';
 
@@ -276,16 +277,25 @@ const keyBoardData: IKeyboardData[] = [
   },
   {
     key: '',
-    value: '',
+    value: ' ',
     className: 'space lastitem'
   }
 ];
 
-export const Keyboard: React.FC = () => (
+interface IKeyboardProps {
+  pressedKey: string;
+}
+
+export const Keyboard: React.FC<IKeyboardProps> = ({ pressedKey }) => (
   <ul id="keyboard">
-    {keyBoardData.map((key, index) => (
-      <li className={key.className} key={index}>
-        {key.value}
+    {keyBoardData.map((item, index) => (
+      <li
+        className={classNames(item.className, {
+          active: item.value === pressedKey
+        })}
+        key={index}
+      >
+        {item.value}
       </li>
     ))}
   </ul>
