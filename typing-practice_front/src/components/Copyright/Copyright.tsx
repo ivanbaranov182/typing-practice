@@ -6,7 +6,7 @@ export const Copyright: React.FC = () => (
   <Typography variant="caption" color="textSecondary">
     {'Copyright © '}
     <Link color="inherit" href="/">
-      Your Keyboard
+      Typing practice
     </Link>{' '}
     {new Date().getFullYear()}.
   </Typography>

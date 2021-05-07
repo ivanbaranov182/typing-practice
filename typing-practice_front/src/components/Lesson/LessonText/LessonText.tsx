@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { StepStatuses, Step } from '../../../views/Lesson/types';
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -16,22 +17,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export enum StepStatuses {
-  COMPLETE = 'complete',
-  ERROR = 'error',
-  NOT_RESOLVE = 'not_resolve'
-}
-
-type Step = {
-  value: string;
-  status: StepStatuses;
-};
-
-interface ILessonTextProps {
+interface LessonTextProps {
   steps: Step[];
 }
 
-export const LessonText: React.FC<ILessonTextProps> = ({ steps }) => {
+export const LessonText: React.FC<LessonTextProps> = ({ steps }) => {
   const classes = useStyles();
 
   const getClass = useCallback((status: StepStatuses) => {

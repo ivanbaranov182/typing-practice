@@ -9,6 +9,14 @@ import { SignUp } from '../views/SignUp';
 import { SignIn } from '../views/SignIn';
 import { ForgotPassword } from '../views/ForgotPassword';
 import { NotFound } from '../views/NotFound';
+import {
+  ADMIN_ROUTE,
+  SIGN_IN_ROUTE,
+  SIGN_UP_ROUTE,
+  HOME_ROUTE,
+  LESSON_GROUP_ROUTE,
+  LESSON_ROUTE
+} from '../utils/routes';
 
 export interface IRouteProps extends RouteProps {
   title: string;
@@ -17,31 +25,45 @@ export interface IRouteProps extends RouteProps {
 
 export const authRoutes: IRouteProps[] = [
   {
-    path: '/',
+    path: HOME_ROUTE,
     component: Home,
     exact: true,
     title: 'Home',
     layout: MainLayout
   },
   {
-    path: '/lesson/:id',
+    path: `${LESSON_ROUTE}/:id`,
     component: Lesson,
     exact: true,
+    title: 'LessonGroup',
+    layout: MainLayout
+  },
+  {
+    path: `${LESSON_GROUP_ROUTE}/:id`,
+    component: Home,
+    exact: true,
     title: 'Lesson',
+    layout: MainLayout
+  },
+  {
+    path: ADMIN_ROUTE,
+    component: Home,
+    exact: true,
+    title: 'Home',
     layout: MainLayout
   }
 ];
 
 export const unAuthRoutes: IRouteProps[] = [
   {
-    path: '/',
-    component: SignUp,
+    path: HOME_ROUTE,
+    component: Home,
     exact: true,
-    title: 'SignUp',
-    layout: ContentOnlyLayout
+    title: 'Home',
+    layout: MainLayout
   },
   {
-    path: '/signup',
+    path: SIGN_UP_ROUTE,
     component: SignUp,
     exact: true,
     title: 'SignUp',

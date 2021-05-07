@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { formElementChange } from 'src/utils';
+import React, { useContext, useState } from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -11,6 +11,10 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Context } from '../../context';
+import { formElementChange } from '../../utils';
+import { login } from '../../http/userAPI';
+import { HOME_ROUTE } from '../../utils/routes';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -18,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1)
   },
   submit: {
@@ -32,8 +36,10 @@ export interface IFormData {
   remember: boolean;
 }
 
-export const SignIn = () => {
+export const SignIn = observer(() => {
+  const { user } = useContext(Context);
   const classes = useStyles();
+  const history = useHistory();
 
   const [data, setData] = useState<IFormData>({
     email: '',
@@ -47,6 +53,14 @@ export const SignIn = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    try {
+      const usedData = await login(data.email, data.password);
+      user.setUser(usedData);
+      user.setIsAuth(true);
+      history.push(HOME_ROUTE);
+    } catch (e) {
+      console.error(e.response.data.message);
+    }
   };
 
   return (
@@ -116,4 +130,4 @@ export const SignIn = () => {
       </form>
     </>
   );
-};
+});

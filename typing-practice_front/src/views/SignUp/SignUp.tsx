@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { formElementChange } from 'src/utils';
+import React, { useContext, useState } from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -11,6 +11,10 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Context } from '../../context';
+import { formElementChange } from '../../utils';
+import { registration } from '../../http/userAPI';
+import { HOME_ROUTE } from '../../utils/routes';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -18,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3)
   },
   submit: {
@@ -27,20 +31,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export interface IFormData {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
   allowExtraEmails: boolean;
 }
 
-export const SignUp: React.FC = () => {
+export const SignUp: React.FC = observer(() => {
+  const { user } = useContext(Context);
   const classes = useStyles();
+  const history = useHistory();
 
   const [data, setData] = useState<IFormData>({
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -53,6 +55,14 @@ export const SignUp: React.FC = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    try {
+      const newUser = await registration(data.email, data.password);
+      user.setUser(newUser);
+      user.setIsAuth(true);
+      history.push(HOME_ROUTE);
+    } catch (e) {
+      console.error(e.response.data.message);
+    }
   };
 
   return (
@@ -65,33 +75,6 @@ export const SignUp: React.FC = () => {
       </Typography>
       <form className={classes.form} onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              autoComplete="fname"
-              name="firstName"
-              variant="outlined"
-              required
-              fullWidth
-              id="firstName"
-              label="First Name"
-              autoFocus
-              onChange={handleChange}
-              value={data.firstName}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="lname"
-              onChange={handleChange}
-              value={data.lastName}
-            />
-          </Grid>
           <Grid item xs={12}>
             <TextField
               variant="outlined"
@@ -168,4 +151,4 @@ export const SignUp: React.FC = () => {
       </form>
     </>
   );
-};
+});

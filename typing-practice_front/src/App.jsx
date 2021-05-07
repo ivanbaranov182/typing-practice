@@ -1,31 +1,33 @@
-import { useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { Switch, BrowserRouter } from 'react-router-dom';
-
-import Fab from '@material-ui/core/Fab';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
+import { observer } from 'mobx-react-lite';
 import 'typeface-roboto';
 
+import { Context } from './context';
 import { authRoutes, unAuthRoutes, commonRoutes } from './routes';
 import RouteWrapper from './utils/RouteWrapper';
+import { Loader } from './components/Loader';
 import './app.css';
+import { check } from './http/userAPI';
 
-const useStyles = makeStyles((theme) => ({
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2)
-  }
-}));
-
-const App = () => {
-  const classes = useStyles();
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
+const App = observer(() => {
+  const { user, ui } = useContext(Context);
 
   const routes = useMemo(
-    () => [...(token ? authRoutes : unAuthRoutes), ...commonRoutes],
-    [token]
+    () => [...(user.isAuth ? authRoutes : unAuthRoutes), ...commonRoutes],
+    [user.isAuth]
   );
+
+  useEffect(() => {
+    check()
+      .then((data) => {
+        user.setUser(data);
+        user.setIsAuth(true);
+      })
+      .finally(() => {
+        ui.setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -36,15 +38,9 @@ const App = () => {
           ))}
         </Switch>
       </BrowserRouter>
-      <Fab
-        color={token ? 'secondary' : 'primary'}
-        className={classes.fab}
-        onClick={() => setToken(token ? null : 'tokenValue')}
-      >
-        <LockOutlinedIcon />
-      </Fab>
+      <Loader />
     </>
   );
-};
+});
 
 export default App;

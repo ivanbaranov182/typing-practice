@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    padding: theme.spacing(3, 2),
+    padding: theme.spacing(1, 2),
     marginTop: 'auto',
     backgroundColor:
       theme.palette.type === 'light'
