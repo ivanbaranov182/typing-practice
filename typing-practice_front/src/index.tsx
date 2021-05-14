@@ -1,21 +1,16 @@
-import ReactDOM from 'react-dom';
-import App from './App';
-import { Context } from './context';
-import LessonGroupStore from './store/LessonGroupStore';
-import LessonStore from './store/LessonStore';
-import UIStore from './store/UIStore';
-import UserStore from './store/UserStore';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(
-  <Context.Provider
-    value={{
-      user: new UserStore(),
-      lesson: new LessonStore(),
-      lessonGroups: new LessonGroupStore(),
-      ui: new UIStore()
-    }}
-  >
+import configureStore from './redux/store';
+import App from './App';
+
+import './app.css';
+
+const store = configureStore();
+
+render(
+  <Provider store={store}>
     <App />
-  </Context.Provider>,
+  </Provider>,
   document.getElementById('root')
 );

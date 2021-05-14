@@ -4,11 +4,11 @@ const ApiError = require('../error/ApiError');
 class LessonController {
   async create(req, res, next) {
     try {
-      const { name, text, lessonGroupId } = req.body;
-      if (!name || !text || !lessonGroupId) {
+      const { name, text, sectionId } = req.body;
+      if (!name || !text || !sectionId) {
         return next(ApiError.badRequest('Data not valid'));
       }
-      const lesson = await Lesson.create({ name, text, lessonGroupId });
+      const lesson = await Lesson.create({ name, text, sectionId });
       return res.json(lesson);
     } catch (e) {
       next(ApiError.badRequest(e.message));
@@ -16,14 +16,14 @@ class LessonController {
   }
 
   async getAll(req, res) {
-    let { lessonGroupId, limit, page } = req.query;
+    let { sectionId, limit, page } = req.query;
     page = page || 1;
     limit = limit || 9;
     let offset = page * limit - limit;
     let lessons;
-    if (lessonGroupId) {
+    if (sectionId) {
       lessons = await Lesson.findAndCountAll({
-        where: { lessonGroupId },
+        where: { sectionId },
         limit,
         offset,
       });

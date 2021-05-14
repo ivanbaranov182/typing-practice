@@ -1,17 +1,15 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Switch, BrowserRouter } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 import 'typeface-roboto';
 
-import { Context } from './context';
 import { authRoutes, unAuthRoutes, commonRoutes } from './routes';
 import RouteWrapper from './utils/RouteWrapper';
 import { Loader } from './components/Loader';
-import './app.css';
 import { check } from './http/userAPI';
 
-const App = observer(() => {
-  const { user, ui } = useContext(Context);
+const App = () => {
+  const user = {};
+  const ui = {};
 
   const routes = useMemo(
     () => [...(user.isAuth ? authRoutes : unAuthRoutes), ...commonRoutes],
@@ -19,14 +17,14 @@ const App = observer(() => {
   );
 
   useEffect(() => {
-    check()
-      .then((data) => {
-        user.setUser(data);
-        user.setIsAuth(true);
-      })
-      .finally(() => {
-        ui.setLoading(false);
-      });
+    // check()
+    //   .then((data) => {
+    //     // user.setUser(data);
+    //     // user.setIsAuth(true);
+    //   })
+    //   .finally(() => {
+    //     // ui.setLoading(false);
+    //   });
   }, []);
 
   return (
@@ -41,6 +39,6 @@ const App = observer(() => {
       <Loader />
     </>
   );
-});
+};
 
 export default App;

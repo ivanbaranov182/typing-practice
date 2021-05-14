@@ -24,9 +24,10 @@ const Lesson = sequelize.define('lesson', {
   rating: { type: DataTypes.INTEGER, defaultValue: 0 },
 });
 
-const LessonGroup = sequelize.define('lesson_group', {
+const Section = sequelize.define('section', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: true },
+  text: { type: DataTypes.TEXT },
   img: { type: DataTypes.STRING, allowNull: false },
 });
 
@@ -44,8 +45,8 @@ Rating.belongsTo(User);
 Lesson.hasMany(Result);
 Result.belongsTo(Lesson);
 
-LessonGroup.hasMany(Lesson);
-Lesson.belongsTo(LessonGroup);
+Section.hasMany(Lesson);
+Lesson.belongsTo(Section);
 
 Lesson.hasMany(Rating);
 Rating.belongsTo(Lesson);
@@ -54,6 +55,6 @@ module.exports = {
   User,
   Result,
   Lesson,
-  LessonGroup,
+  Section,
   Rating,
 };

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -11,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Context } from '../../context';
 import { formElementChange } from '../../utils';
 import { registration } from '../../http/userAPI';
 import { HOME_ROUTE } from '../../utils/routes';
@@ -37,8 +35,8 @@ export interface IFormData {
   allowExtraEmails: boolean;
 }
 
-export const SignUp: React.FC = observer(() => {
-  const { user } = useContext(Context);
+export const SignUp: React.FC = () => {
+  const user = {};
   const classes = useStyles();
   const history = useHistory();
 
@@ -57,8 +55,8 @@ export const SignUp: React.FC = observer(() => {
     e.preventDefault();
     try {
       const newUser = await registration(data.email, data.password);
-      user.setUser(newUser);
-      user.setIsAuth(true);
+      // user.setUser(newUser);
+      // user.setIsAuth(true);
       history.push(HOME_ROUTE);
     } catch (e) {
       console.error(e.response.data.message);
@@ -151,4 +149,4 @@ export const SignUp: React.FC = observer(() => {
       </form>
     </>
   );
-});
+};

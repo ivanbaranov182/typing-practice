@@ -9,6 +9,7 @@ const errorHandler = require('./middleware/ErrorHandlingMiddleware');
 const path = require('path');
 
 const PORT = process.env.PORT || 5000;
+const host = `http://localhost:${PORT}`;
 
 const app = express();
 app.use(cors());
@@ -23,9 +24,7 @@ const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-    app.listen(PORT, () =>
-      console.log(`Server start on http://localhost:${PORT}`),
-    );
+    app.listen(PORT, () => console.log(`Server start on ${host}`));
   } catch (e) {
     console.log(e);
   }

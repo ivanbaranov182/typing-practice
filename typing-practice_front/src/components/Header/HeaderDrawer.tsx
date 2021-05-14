@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { observer } from 'mobx-react-lite';
+import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -11,7 +10,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { Context } from '../../context';
 
 const drawerWidth = 240;
 
@@ -59,12 +57,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const HeaderDrawer: React.FC = observer(() => {
-  const { ui } = useContext(Context);
+export const HeaderDrawer: React.FC = () => {
+  const ui = {};
   const classes = useStyles();
 
   const handleDrawerClose = () => {
-    ui.setDrawer(false);
+    // ui.setDrawer(false);
   };
 
   return (
@@ -72,7 +70,7 @@ export const HeaderDrawer: React.FC = observer(() => {
       className={classes.drawer}
       variant="persistent"
       anchor="left"
-      open={ui.drawerData}
+      open={false}
       classes={{
         paper: classes.drawerPaper
       }}
@@ -106,4 +104,4 @@ export const HeaderDrawer: React.FC = observer(() => {
       </List>
     </Drawer>
   );
-});
+};

@@ -11,8 +11,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { formElementChange } from '../../utils';
-import { login } from '../../http/userAPI';
-import { HOME_ROUTE } from '../../utils/routes';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -29,19 +27,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export interface IFormData {
+  fullname: string;
   email: string;
-  password: string;
-  remember: boolean;
+  message: string;
+  terms: boolean;
 }
 
-export const SignIn = () => {
+export const Contacts = () => {
   const classes = useStyles();
-  const history = useHistory();
 
   const [data, setData] = useState<IFormData>({
+    fullname: '',
     email: '',
-    password: '',
-    remember: false
+    message: '',
+    terms: false
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,25 +49,31 @@ export const SignIn = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    try {
-      const usedData = await login(data.email, data.password);
-      // user.setUser(usedData);
-      // user.setIsAuth(true);
-      history.push(HOME_ROUTE);
-    } catch (e) {
-      console.error(e.response.data.message);
-    }
+    console.log('data', data);
   };
 
   return (
-    <>
+    <div className="these beliefs hold true for your projects">
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        Contacts
       </Typography>
       <form className={classes.form} onSubmit={handleSubmit}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="fullname"
+          label="Fullname"
+          name="fullname"
+          autoComplete="fullname"
+          autoFocus
+          onChange={handleChange}
+          value={data.fullname}
+        />
         <TextField
           variant="outlined"
           margin="normal"
@@ -77,35 +82,36 @@ export const SignIn = () => {
           id="email"
           label="Email Address"
           name="email"
+          type="email"
           autoComplete="email"
-          autoFocus
           onChange={handleChange}
           value={data.email}
         />
+
         <TextField
           variant="outlined"
           margin="normal"
           required
           fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
+          id="message"
+          label="Message"
+          name="message"
+          autoComplete="message"
+          multiline
           onChange={handleChange}
-          value={data.password}
+          value={data.message}
         />
         <FormControlLabel
           control={
             <Checkbox
-              value="remember"
-              name="remember"
+              value="terms"
+              name="terms"
               color="primary"
               onChange={handleChange}
-              checked={data.remember}
+              checked={data.terms}
             />
           }
-          label="Remember me"
+          label={`I agree to the{" "}<a href="https://google.com">terms and conditions</a>`}
         />
         <Button
           type="submit"
@@ -114,17 +120,9 @@ export const SignIn = () => {
           color="primary"
           className={classes.submit}
         >
-          Sign In
+          Send
         </Button>
-        <Grid container>
-          <Grid item xs>
-            <RouterLink to="forgot-password">Forgot password?</RouterLink>
-          </Grid>
-          <Grid item>
-            <RouterLink to="signup">Don't have an account? Sign Up</RouterLink>
-          </Grid>
-        </Grid>
       </form>
-    </>
+    </div>
   );
 };

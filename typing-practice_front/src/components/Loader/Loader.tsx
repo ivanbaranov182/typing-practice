@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
-import { observer } from 'mobx-react-lite';
+import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Context } from '../../context';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,8 +12,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Loader: React.FC = observer(() => {
-  const { ui } = useContext(Context);
+export const Loader: React.FC = () => {
+  const ui = {
+    loadingData: false
+  };
   const classes = useStyles();
   return (
     <>
@@ -24,4 +24,4 @@ export const Loader: React.FC = observer(() => {
       </Backdrop>
     </>
   );
-});
+};

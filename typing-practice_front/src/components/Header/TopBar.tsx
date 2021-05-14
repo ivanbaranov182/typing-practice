@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import classnames from 'classnames';
-import { Context } from '../../context';
 import { SIGN_IN_ROUTE, ADMIN_ROUTE } from '../../utils/routes';
 
 const drawerWidth = 240;
@@ -38,17 +36,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const TopBar: React.FC = observer(() => {
-  const { user, ui } = useContext(Context);
+export const TopBar: React.FC = () => {
+  const user = {
+    isAuth: true
+  };
+  const ui = {
+    drawerData: false
+  };
   const classes = useStyles();
 
   const logOut = () => {
-    user.setUser({});
-    user.setIsAuth(false);
+    // user.setUser({});
+    // user.setIsAuth(false);
   };
 
   const toggleDrawerOpen = () => {
-    ui.toggleDrawer();
+    // ui.toggleDrawer();
   };
 
   return (
@@ -97,4 +100,4 @@ export const TopBar: React.FC = observer(() => {
       </Toolbar>
     </AppBar>
   );
-});
+};

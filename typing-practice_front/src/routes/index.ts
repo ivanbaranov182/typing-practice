@@ -5,17 +5,22 @@ import { ContentOnlyLayout } from '../layouts/ContentOnlyLayout';
 
 import { Home } from '../views/Home';
 import { Lesson } from '../views/Lesson';
+import { Section } from '../views/Section';
+import { Sections } from '../views/Sections';
 import { SignUp } from '../views/SignUp';
 import { SignIn } from '../views/SignIn';
 import { ForgotPassword } from '../views/ForgotPassword';
+import { Contacts } from '../views/Contacts';
 import { NotFound } from '../views/NotFound';
 import {
   ADMIN_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
   HOME_ROUTE,
-  LESSON_GROUP_ROUTE,
-  LESSON_ROUTE
+  SECTIONS_ROUTE,
+  SECTION_ROUTE,
+  LESSON_ROUTE,
+  CONTACTS_ROUTE
 } from '../utils/routes';
 
 export interface IRouteProps extends RouteProps {
@@ -24,27 +29,6 @@ export interface IRouteProps extends RouteProps {
 }
 
 export const authRoutes: IRouteProps[] = [
-  {
-    path: HOME_ROUTE,
-    component: Home,
-    exact: true,
-    title: 'Home',
-    layout: MainLayout
-  },
-  {
-    path: `${LESSON_ROUTE}/:id`,
-    component: Lesson,
-    exact: true,
-    title: 'LessonGroup',
-    layout: MainLayout
-  },
-  {
-    path: `${LESSON_GROUP_ROUTE}/:id`,
-    component: Home,
-    exact: true,
-    title: 'Lesson',
-    layout: MainLayout
-  },
   {
     path: ADMIN_ROUTE,
     component: Home,
@@ -56,13 +40,6 @@ export const authRoutes: IRouteProps[] = [
 
 export const unAuthRoutes: IRouteProps[] = [
   {
-    path: HOME_ROUTE,
-    component: Home,
-    exact: true,
-    title: 'Home',
-    layout: MainLayout
-  },
-  {
     path: SIGN_UP_ROUTE,
     component: SignUp,
     exact: true,
@@ -70,7 +47,7 @@ export const unAuthRoutes: IRouteProps[] = [
     layout: ContentOnlyLayout
   },
   {
-    path: '/signin',
+    path: SIGN_IN_ROUTE,
     component: SignIn,
     title: 'SignIn',
     layout: ContentOnlyLayout
@@ -84,6 +61,40 @@ export const unAuthRoutes: IRouteProps[] = [
 ];
 
 export const commonRoutes: IRouteProps[] = [
+  {
+    path: HOME_ROUTE,
+    component: Home,
+    exact: true,
+    title: 'Home',
+    layout: MainLayout
+  },
+  {
+    path: `${LESSON_ROUTE}/:id`,
+    component: Lesson,
+    exact: true,
+    title: 'Lesson',
+    layout: MainLayout
+  },
+  {
+    path: SECTIONS_ROUTE,
+    component: Sections,
+    exact: true,
+    title: 'Sections',
+    layout: MainLayout
+  },
+  {
+    path: `${SECTION_ROUTE}/:id`,
+    component: Section,
+    exact: true,
+    title: 'Section',
+    layout: MainLayout
+  },
+  {
+    path: CONTACTS_ROUTE,
+    component: Contacts,
+    title: 'Contacts',
+    layout: MainLayout
+  },
   {
     path: '*',
     component: NotFound,
