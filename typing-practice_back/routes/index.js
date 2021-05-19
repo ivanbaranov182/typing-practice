@@ -9,7 +9,7 @@ const ratingRouter = require('./ratingRouter');
 router.use('/user', userRouter);
 router.use('/lesson', lessonRouter);
 router.use('/section', sectionRouter);
-router.use('/result', resultRouter);
+// router.use('/result', resultRouter);
 router.use('/rating', ratingRouter);
 
 module.exports = router;

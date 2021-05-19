@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { AppState } from 'src/redux/reducers';
+import { toggleDrawer } from 'src/redux/actions/actionCreators/uiActionCreators';
+import { loadSections } from 'src/redux/actions/actionCreators/sectionsActionCreators';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -10,6 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { HeaderDrawerSections } from './HeaderDrawerSections';
 
 const drawerWidth = 240;
 
@@ -57,51 +63,75 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const HeaderDrawer: React.FC = () => {
-  const ui = {};
-  const classes = useStyles();
+interface ILink {
+  link: string;
+  text: string;
+  childs?: ILink[];
+}
 
-  const handleDrawerClose = () => {
-    // ui.setDrawer(false);
-  };
+const mainlinks: ILink[] = [
+  {
+    link: '/',
+    text: 'Home'
+  },
+  {
+    link: '/section',
+    text: 'Sections'
+  },
+  {
+    link: '/contacts',
+    text: 'Contacts'
+  }
+];
+
+const lessonsLinks: ILink[] = [];
+
+export const HeaderDrawer: React.FC = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const drawer = useSelector((state: AppState) => state.ui.drawer);
+
+  const toggleDrawerOpen = () => dispatch(toggleDrawer());
+
+  useEffect(() => {
+    dispatch(loadSections());
+  }, []);
 
   return (
     <Drawer
       className={classes.drawer}
       variant="persistent"
       anchor="left"
-      open={false}
+      open={drawer}
       classes={{
         paper: classes.drawerPaper
       }}
     >
       <div className={classes.drawerHeader}>
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton onClick={toggleDrawerOpen}>
           <ChevronLeftIcon />
         </IconButton>
       </div>
       <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
+      <List dense={true}>
+        {mainlinks.map((link, index) => (
+          <ListItem
+            button
+            key={link.text}
+            onClick={() => history.push(link.link)}
+          >
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={link.text} />
           </ListItem>
         ))}
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <HeaderDrawerSections />
+      <Divider />
     </Drawer>
   );
 };

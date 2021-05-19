@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Section } from 'src/types/section';
+import { SECTION_ROUTE } from 'src/utils/routes';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -31,7 +32,7 @@ export const SectionItem: React.FC<Section> = ({ id, img, name, text }) => {
   return (
     <Card
       className={classes.card}
-      onClick={() => history.push(`/sections/${id}`)}
+      onClick={() => history.push(`${SECTION_ROUTE}/${id}`)}
     >
       <CardMedia
         className={classes.cardMedia}

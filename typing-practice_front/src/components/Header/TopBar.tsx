@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import classnames from 'classnames';
+import { AppState } from 'src/redux/reducers';
+import { toggleDrawer } from 'src/redux/actions/actionCreators/uiActionCreators';
+import { userLogOut } from 'src/redux/actions/actionCreators/userActionCreators';
 import { SIGN_IN_ROUTE, ADMIN_ROUTE } from '../../utils/routes';
 
 const drawerWidth = 240;
@@ -37,28 +41,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const TopBar: React.FC = () => {
-  const user = {
-    isAuth: true
-  };
-  const ui = {
-    drawerData: false
-  };
+  const dispatch = useDispatch();
+  const user = useSelector((state: AppState) => state.user.data);
+
+  const drawer = useSelector((state: AppState) => state.ui.drawer);
   const classes = useStyles();
 
-  const logOut = () => {
-    // user.setUser({});
-    // user.setIsAuth(false);
-  };
+  const logOut = () => dispatch(userLogOut());
 
-  const toggleDrawerOpen = () => {
-    // ui.toggleDrawer();
-  };
+  const toggleDrawerOpen = () => dispatch(toggleDrawer());
 
   return (
     <AppBar
       position="relative"
       className={classnames(classes.appBar, {
-        [classes.appBarShift]: ui.drawerData
+        [classes.appBarShift]: drawer
       })}
     >
       <Toolbar variant="dense">
@@ -81,7 +78,7 @@ export const TopBar: React.FC = () => {
         >
           Typing practice
         </Typography>
-        {!user.isAuth ? (
+        {!user ? (
           <>
             <Button color="inherit" component={NavLink} to={SIGN_IN_ROUTE}>
               Login

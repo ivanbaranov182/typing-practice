@@ -3,6 +3,9 @@ import { RouteProps } from 'react-router-dom';
 import { MainLayout } from '../layouts/MainLayout';
 import { ContentOnlyLayout } from '../layouts/ContentOnlyLayout';
 
+import { AdminMain } from '../views/AdminMain';
+import { AdminSection } from '../views/AdminSection';
+
 import { Home } from '../views/Home';
 import { Lesson } from '../views/Lesson';
 import { Section } from '../views/Section';
@@ -14,6 +17,7 @@ import { Contacts } from '../views/Contacts';
 import { NotFound } from '../views/NotFound';
 import {
   ADMIN_ROUTE,
+  ADMIN_SECTION,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
   HOME_ROUTE,
@@ -31,9 +35,16 @@ export interface IRouteProps extends RouteProps {
 export const authRoutes: IRouteProps[] = [
   {
     path: ADMIN_ROUTE,
-    component: Home,
+    component: AdminMain,
     exact: true,
     title: 'Home',
+    layout: MainLayout
+  },
+  {
+    path: `${ADMIN_SECTION}/:id`,
+    component: AdminSection,
+    exact: true,
+    title: 'AdminSection',
     layout: MainLayout
   }
 ];
@@ -94,11 +105,11 @@ export const commonRoutes: IRouteProps[] = [
     component: Contacts,
     title: 'Contacts',
     layout: MainLayout
-  },
-  {
-    path: '*',
-    component: NotFound,
-    title: 'Page not found',
-    layout: ContentOnlyLayout
   }
+  // {
+  //   path: '*',
+  //   component: NotFound,
+  //   title: 'Page not found',
+  //   layout: ContentOnlyLayout
+  // }
 ];

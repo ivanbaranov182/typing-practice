@@ -26,7 +26,8 @@ class SectionController {
   }
 
   async getAll(req, res) {
-    const sections = await Section.findAll();
+    // TODO remove lesson text
+    const sections = await Section.findAll({ include: [{ model: Lesson }] });
     return res.json(sections);
   }
 

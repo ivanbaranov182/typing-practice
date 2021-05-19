@@ -1,14 +1,14 @@
 import * as sectionActionTypes from '../actions/actionTypes/sectionActionTypes';
-import { SectionDetail } from '../../types/section';
+import { Section } from '../../types/section';
 
 export interface SectionState {
-  data: SectionDetail[];
+  data: Section | null;
   loading: boolean;
   error: Error | string;
 }
 
 const initialState: SectionState = {
-  data: [],
+  data: null,
   loading: false,
   error: ''
 };

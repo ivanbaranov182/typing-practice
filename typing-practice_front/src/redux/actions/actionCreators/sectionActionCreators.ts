@@ -1,4 +1,4 @@
-import { SectionDetail } from '../../../types/section';
+import { Section } from '../../../types/section';
 import * as sectionActionTypes from '../actionTypes/sectionActionTypes';
 
 export const loadSection = (
@@ -9,7 +9,7 @@ export const loadSection = (
 });
 
 export const loadSectionSuccess = (
-  data: SectionDetail[]
+  data: Section
 ): sectionActionTypes.LoadSuccessSectionAction => ({
   type: sectionActionTypes.LOAD_SECTION_SUCCESS,
   data

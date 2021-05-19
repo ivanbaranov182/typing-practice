@@ -1,24 +1,28 @@
 import jwt_decode from 'jwt-decode';
+import { UserLogin, UserRegister } from 'src/types/user';
 import { host, authHost } from './index';
 
-export const registration = async (email: string, password: string) => {
-  const { data } = await host.post('api/user/registration', {
-    email,
-    password,
-    role: 'USER'
-  });
-  localStorage.setItem('token', data.token);
-  return jwt_decode(data.token);
-};
-
-export const login = async (email: string, password: string) => {
-  const { data } = await host.post('api/user/login', { email, password });
-  localStorage.setItem('token', data.token);
-  return jwt_decode(data.token);
-};
-
-export const check = async () => {
-  const { data }: any = await authHost.get('api/user/auth');
-  localStorage.setItem('token', data.token);
-  return data.token;
+export const userApi = {
+  registration: async ({ email, password, confirmPassword }: UserRegister) => {
+    const { data } = await host.post('/user/registration', {
+      email,
+      password,
+      confirmPassword,
+      role: 'USER'
+    });
+    localStorage.setItem('token', data.token);
+    return jwt_decode(data.token);
+  },
+  login: async ({ email, password }: UserLogin) => {
+    const { data } = await host.post('/user/login', { email, password });
+    localStorage.setItem('token', data.token);
+    return jwt_decode(data.token);
+  },
+  check: async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+    const { data } = await authHost.get('/user/auth');
+    localStorage.setItem('token', data.token);
+    return jwt_decode(data.token);
+  }
 };

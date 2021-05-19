@@ -1,14 +1,25 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router';
 import Typography from '@material-ui/core/Typography';
+import { loadLesson } from 'src/redux/actions/actionCreators/lessonActionCreators';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from 'src/redux/reducers';
+import { InlineLoader } from 'src/components/InlineLoader';
 import { Keyboard } from '../../components/Keyboard';
 import { LessonStat } from '../../components/Lesson/LessonStat';
 import { LessonInput } from '../../components/Lesson/LessonInput';
 import { LessonText } from '../../components/Lesson/LessonText';
 import { Step, StepStatuses } from './types';
 
+// TODO split lesson into steps
+
 export const Lesson: React.FC = () => {
+  const dispatch = useDispatch();
   const { id } = useParams<{ id?: string }>();
+
+  const loading = useSelector((state: AppState) => state.lesson.loading);
+  const lesson = useSelector((state: AppState) => state.lesson.data);
+
   const [step, setStep] = useState<{ value: number; result: string }>({
     value: 0,
     result: ''
@@ -28,14 +39,19 @@ export const Lesson: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const text = 'It, is a long established.';
+    if (!id) return;
+    dispatch(loadLesson(id));
+  }, [id]);
+
+  useEffect(() => {
+    if (!lesson) return;
     const splitedText = {
-      ...text
+      ...lesson.text
         .split(' ')
         .map((i) => ({ value: i, status: StepStatuses.NOT_RESOLVE }))
     };
     setSteps(splitedText);
-  }, [id]);
+  }, [lesson]);
 
   const handleSpacePress = () => {
     setSteps((steps) => ({
@@ -118,13 +134,15 @@ export const Lesson: React.FC = () => {
     }
   }, [progress]);
 
+  if (loading) <InlineLoader />;
+
   return (
     <div className="lesson">
       <Typography variant="h2" component="h1" gutterBottom>
-        Lesson title
+        {lesson?.name}
       </Typography>
       <Typography variant="h5" component="h2" gutterBottom>
-        Lesson description.
+        Lesson description...
       </Typography>
       <LessonStat
         signs={signs}

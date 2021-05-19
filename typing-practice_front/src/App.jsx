@@ -1,39 +1,30 @@
-import { useEffect, useMemo } from 'react';
-import { Switch, BrowserRouter } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { Switch, BrowserRouter, Route } from 'react-router-dom';
+
 import 'typeface-roboto';
 
+import { MainLayout } from 'src/layouts/MainLayout';
 import { authRoutes, unAuthRoutes, commonRoutes } from './routes';
-import RouteWrapper from './utils/RouteWrapper';
 import { Loader } from './components/Loader';
-import { check } from './http/userAPI';
 
 const App = () => {
-  const user = {};
-  const ui = {};
+  const user = useSelector((state) => state.user.data);
 
   const routes = useMemo(
-    () => [...(user.isAuth ? authRoutes : unAuthRoutes), ...commonRoutes],
-    [user.isAuth]
+    () => [...(user ? authRoutes : unAuthRoutes), ...commonRoutes],
+    [user]
   );
-
-  useEffect(() => {
-    // check()
-    //   .then((data) => {
-    //     // user.setUser(data);
-    //     // user.setIsAuth(true);
-    //   })
-    //   .finally(() => {
-    //     // ui.setLoading(false);
-    //   });
-  }, []);
 
   return (
     <>
       <BrowserRouter>
         <Switch>
-          {routes.map((route, i) => (
-            <RouteWrapper {...route} key={i} />
-          ))}
+          <MainLayout>
+            {routes.map((route, i) => (
+              <Route {...route} key={i} />
+            ))}
+          </MainLayout>
         </Switch>
       </BrowserRouter>
       <Loader />

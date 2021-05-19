@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -10,8 +11,9 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { userLoginLoading } from 'src/redux/actions/actionCreators/userActionCreators';
 import { formElementChange } from '../../utils';
-import { login } from '../../http/userAPI';
+// import { login } from '../../http/userAPI';
 import { HOME_ROUTE } from '../../utils/routes';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +36,8 @@ export interface IFormData {
   remember: boolean;
 }
 
-export const SignIn = () => {
+export const SignIn: React.FC = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
 
@@ -50,14 +53,8 @@ export const SignIn = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    try {
-      const usedData = await login(data.email, data.password);
-      // user.setUser(usedData);
-      // user.setIsAuth(true);
-      history.push(HOME_ROUTE);
-    } catch (e) {
-      console.error(e.response.data.message);
-    }
+    dispatch(userLoginLoading(data));
+    history.push(HOME_ROUTE);
   };
 
   return (

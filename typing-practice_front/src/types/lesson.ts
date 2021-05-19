@@ -1,7 +1,8 @@
-export interface Lesson {
-  id: number;
+import { Entity } from '.';
+
+export interface Lesson extends Entity {
   name: string;
   text: string;
-  lessonGroupId: number;
+  sectionId: number;
   rating?: number;
 }

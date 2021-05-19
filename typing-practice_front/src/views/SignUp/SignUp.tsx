@@ -1,5 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { UserRegister } from 'src/types/user';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -10,8 +12,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { userRegistrationLoading } from 'src/redux/actions/actionCreators/userActionCreators';
 import { formElementChange } from '../../utils';
-import { registration } from '../../http/userAPI';
 import { HOME_ROUTE } from '../../utils/routes';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,15 +30,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export interface IFormData {
-  email: string;
-  password: string;
-  confirmPassword: string;
+export interface IFormData extends UserRegister {
   allowExtraEmails: boolean;
 }
 
 export const SignUp: React.FC = () => {
-  const user = {};
+  const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
 
@@ -53,14 +52,8 @@ export const SignUp: React.FC = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    try {
-      const newUser = await registration(data.email, data.password);
-      // user.setUser(newUser);
-      // user.setIsAuth(true);
-      history.push(HOME_ROUTE);
-    } catch (e) {
-      console.error(e.response.data.message);
-    }
+    dispatch(userRegistrationLoading(data));
+    history.push(HOME_ROUTE);
   };
 
   return (

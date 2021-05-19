@@ -1,12 +1,9 @@
+import { Entity } from '.';
 import { Lesson } from './lesson';
 
-export interface Section {
-  id: number;
+export interface Section extends Entity {
   name: string;
   text: string;
-  img?: string;
-}
-
-export interface SectionDetail extends Selection {
-  lessons: Lesson[];
+  img: string;
+  lessons?: Lesson[];
 }

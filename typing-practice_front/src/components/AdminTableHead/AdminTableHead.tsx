@@ -1,0 +1,63 @@
+import React from 'react';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import { AdminTableHeadProps } from './types';
+import { useStyles } from './styles';
+import { RowsData } from '../AdminSectionsTable/types';
+
+export const AdminTableHead: React.FC<AdminTableHeadProps> = ({
+  onSelectAllClick,
+  order,
+  orderBy,
+  numSelected,
+  rowCount,
+  onRequestSort,
+  headCells
+}) => {
+  const classes = useStyles();
+  const createSortHandler = (property: keyof RowsData) => (
+    event: React.MouseEvent<unknown>
+  ) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        <TableCell padding="checkbox">
+          <Checkbox
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{ 'aria-label': 'select all' }}
+            color="primary"
+          />
+        </TableCell>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? 'right' : 'left'}
+            padding={headCell.disablePadding ? 'none' : 'default'}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : 'asc'}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <span className={classes.visuallyHidden}>
+                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                </span>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+};

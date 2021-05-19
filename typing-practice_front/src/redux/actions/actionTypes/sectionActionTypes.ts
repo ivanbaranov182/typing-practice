@@ -1,4 +1,4 @@
-import { SectionDetail } from '../../../types/section';
+import { Section } from '../../../types/section';
 
 const actionType = 'sectionActionTypes';
 
@@ -11,7 +11,7 @@ export interface LoadSectionAction {
 export const LOAD_SECTION_SUCCESS = `${actionType}/LOAD_SECTION_SUCCESS`;
 export interface LoadSuccessSectionAction {
   type: typeof LOAD_SECTION_SUCCESS;
-  data: SectionDetail[];
+  data: Section;
 }
 
 export const LOAD_SECTION_ERROR = `${actionType}/LOAD_SECTION_ERROR`;

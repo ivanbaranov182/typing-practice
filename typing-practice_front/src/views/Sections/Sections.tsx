@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadSections } from 'src/redux/actions/actionCreators/sectionsActionCreators';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { AppState } from 'src/redux/reducers';
 
 import { SectionItem } from 'src/components/SectionItem';
@@ -27,15 +26,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Sections: React.FC = () => {
-  const dispatch = useDispatch();
   const classes = useStyles();
 
   const sections = useSelector((state: AppState) => state.sections.data);
   const loading = useSelector((state: AppState) => state.sections.loading);
-
-  useEffect(() => {
-    dispatch(loadSections());
-  }, []);
 
   return (
     <>
@@ -88,6 +82,8 @@ export const Sections: React.FC = () => {
                   name={section.name}
                   text={section.text}
                   img={section.img}
+                  createdAt={section.createdAt}
+                  updatedAt={section.updatedAt}
                 />
               </Grid>
             ))}
