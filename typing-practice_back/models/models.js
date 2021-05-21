@@ -28,7 +28,7 @@ const Section = sequelize.define('section', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: true },
   text: { type: DataTypes.TEXT },
-  img: { type: DataTypes.STRING, allowNull: false },
+  img: { type: DataTypes.STRING, allowNull: true },
 });
 
 const Rating = sequelize.define('rating', {

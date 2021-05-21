@@ -6,24 +6,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import { Section } from 'src/types/section';
 import { SECTION_ROUTE } from 'src/utils/routes';
-
-const useStyles = makeStyles((theme) => ({
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    cursor: 'pointer'
-  },
-  cardMedia: {
-    paddingTop: '56.25%' // 16:9
-  },
-  cardContent: {
-    flexGrow: 1
-  }
-}));
+import { useStyles } from './SectionItem.style';
 
 export const SectionItem: React.FC<Section> = ({ id, img, name, text }) => {
   const classes = useStyles();

@@ -1,0 +1,27 @@
+import { makeStyles } from '@material-ui/core/styles';
+
+export const useStyles = makeStyles((theme) => ({
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  },
+  icon: {
+    float: 'left',
+    width: '100px',
+    height: '100px',
+    marginRight: '15px',
+    marginTop: theme.spacing(2)
+  },
+  iconAnnotation: {
+    fontSize: '0.8rem',
+    marginTop: theme.spacing(2),
+    marginBottom: '10px'
+  }
+}));

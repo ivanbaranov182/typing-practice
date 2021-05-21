@@ -11,3 +11,27 @@ export const formElementChange = <T>(
     ...data,
     [name]: type === 'checkbox' ? checked : value
   });
+
+const firstZero = (d: number): string => `${d < 10 ? 0 : ''}${d}`;
+
+export const dateFormatter = (d: Date) => {
+  const date = d;
+
+  const toDate = (): string =>
+    `${firstZero(date.getDate())}.${firstZero(
+      date.getMonth() + 1
+    )}.${date.getFullYear()}`;
+
+  const toTime = (): string =>
+    `${firstZero(date.getHours())}.${firstZero(
+      date.getMinutes()
+    )}.${date.getSeconds()}`;
+
+  const toDateTime = (): string => `${toDate()} ${toTime()}`;
+
+  return {
+    toDate,
+    toTime,
+    toDateTime
+  };
+};

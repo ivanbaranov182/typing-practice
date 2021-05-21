@@ -3,8 +3,9 @@ import { RouteProps } from 'react-router-dom';
 import { MainLayout } from '../layouts/MainLayout';
 import { ContentOnlyLayout } from '../layouts/ContentOnlyLayout';
 
-import { AdminMain } from '../views/AdminMain';
-import { AdminSection } from '../views/AdminSection';
+import { AdminMain } from '../views/Admin/AdminMain';
+import { AdminSection } from '../views/Admin/AdminSection';
+import { AdminSectionAdd } from '../views/Admin/AdminSectionAdd';
 
 import { Home } from '../views/Home';
 import { Lesson } from '../views/Lesson';
@@ -18,6 +19,8 @@ import { NotFound } from '../views/NotFound';
 import {
   ADMIN_ROUTE,
   ADMIN_SECTION,
+  ADMIN_SECTION_ADD,
+  ADMIN_SECTION_EDIT,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
   HOME_ROUTE,
@@ -38,6 +41,20 @@ export const authRoutes: IRouteProps[] = [
     component: AdminMain,
     exact: true,
     title: 'Home',
+    layout: MainLayout
+  },
+  {
+    path: ADMIN_SECTION_ADD,
+    component: AdminSectionAdd,
+    exact: true,
+    title: 'AdminSectionAdd',
+    layout: MainLayout
+  },
+  {
+    path: `${ADMIN_SECTION_EDIT}/:id`,
+    component: AdminSectionAdd,
+    exact: true,
+    title: 'AdminSectionEdit',
     layout: MainLayout
   },
   {

@@ -1,7 +1,12 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import { sectionApi } from 'src/http/sectionAPI';
 import { LOAD_SECTIONS_LOADING } from 'src/redux/actions/actionTypes/sectionsActionTypes';
-import { LOAD_SECTION_LOADING } from 'src/redux/actions/actionTypes/sectionActionTypes';
+import {
+  CREATE_SECTION_LOADING,
+  DELETE_SECTION_LOADING,
+  EDIT_SECTION_LOADING,
+  LOAD_SECTION_LOADING
+} from 'src/redux/actions/actionTypes/sectionActionTypes';
 import { userApi } from 'src/http/userAPI';
 import { lessonApi } from 'src/http/lessonAPI';
 import {
@@ -10,7 +15,13 @@ import {
 } from '../actions/actionCreators/sectionsActionCreators';
 import {
   loadSectionSuccess,
-  loadSectionError
+  loadSectionError,
+  createSectionError,
+  createSectionSuccess,
+  editSectionError,
+  editSectionSuccess,
+  deleteSectionSuccess,
+  deleteSectionError
 } from '../actions/actionCreators/sectionActionCreators';
 import {
   userCheckError,
@@ -46,6 +57,33 @@ function* fetchSection({ id }) {
     yield put(loadSectionSuccess(data));
   } catch (error) {
     yield put(loadSectionError(error));
+  }
+}
+
+function* fetchCreateSection({ sectionData }) {
+  try {
+    const { data } = yield sectionApi.createSection(sectionData);
+    yield put(createSectionSuccess(data));
+  } catch (error) {
+    yield put(createSectionError(error));
+  }
+}
+
+function* fetchDeleteSection({ id }) {
+  try {
+    yield sectionApi.deleteSection(id);
+    yield put(deleteSectionSuccess());
+  } catch (error) {
+    yield put(deleteSectionError(error));
+  }
+}
+
+function* fetchEditSection({ sectionData }) {
+  try {
+    const { data } = yield sectionApi.editSection(sectionData);
+    yield put(editSectionSuccess(data));
+  } catch (error) {
+    yield put(editSectionError(error));
   }
 }
 
@@ -92,4 +130,7 @@ export default function* rootSaga() {
   yield takeEvery(USER_REGISTRATION_LOADING, fetchUserRegistration);
   yield takeEvery(USER_LOGIN_LOADING, fetchUserLogin);
   yield takeEvery(USER_CHECK_LOADING, fetchUserCheck);
+  yield takeEvery(CREATE_SECTION_LOADING, fetchCreateSection);
+  yield takeEvery(EDIT_SECTION_LOADING, fetchEditSection);
+  yield takeEvery(DELETE_SECTION_LOADING, fetchDeleteSection);
 }

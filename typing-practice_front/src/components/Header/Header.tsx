@@ -1,6 +1,6 @@
 import React from 'react';
+import { HeaderDrawer } from './HeaderDrawer/HeaderDrawer';
 import { TopBar } from './TopBar';
-import { HeaderDrawer } from './HeaderDrawer';
 
 export const Header: React.FC = () => (
   <>
